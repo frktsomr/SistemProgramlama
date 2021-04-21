@@ -1,2 +1,2 @@
 # SistemProgramlama
-#YarenSarac Adamdır
+#SistemProgramlamaÖdev
