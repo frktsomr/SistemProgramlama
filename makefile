@@ -35,4 +35,4 @@ obj/jrb.o: src/jrb.c include/jrb.h include/jval.h
 	gcc $(CFLAGS) -c -o obj/jrb.o src/jrb.c
 
 bin/main: src/main.c $(LIBS)
-	$(CC) $(INCLUDE) -g -o bin/main src/main.c lib/libfdr.a
+	$(CC) $(CFLAGS) -g -o bin/main src/main.c lib/libfdr.a
