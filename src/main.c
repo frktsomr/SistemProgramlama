@@ -1,30 +1,35 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "fields.h"
 
 int main(int argc, char**argv)
 {
   IS is;
   int i;
-
-  //if (argc != 2) { fprintf(stderr, "txt/dosya.txt"); exit(1); }
+  int sayac=0;
+  //if (argc != 2) { fprintf(stderr, "printwords filename\n"); exit(1); }
  
   /* Open the file as an inputstruct.  Error check. */
 
-  is = new_inputstruct(NULL);
-  /*if (is == NULL) {
-    perror(argv[1]);
+  is = new_inputstruct("dosya.txt");
+  if (is == NULL) {
+    perror("dosya hatasi ");
     exit(1);
-  }*/
+  }
 
   /* Read each line with get_line().  Print out each word. */
 
-  while(get_line(is) >= 0) {  
+    while(get_line(is) >= 0 && sayac!=5) {  
     for (i = 0; i < is->NF; i++) {
       printf("%d: %s\n", is->line, is->fields[i]);
+      sayac++;
+      
     }
     
   }
+printf("kelime sayisi: %d\n",sayac);
+ 
     
   /* Free up the memory allocated with new_inputstruct, and
      close the open file.  This is not necessary in this program, 
