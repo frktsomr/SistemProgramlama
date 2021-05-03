@@ -38,6 +38,7 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
     printf("%s\t", bn->key.s);
     printf("%s\n", bn->val.s); 
   }
-  // EN SON AĞACI SİLMEYİ UNUTMA
+  // EN SON AĞACI SİLMEYİ UNUTMA.
+  
   return 0;
 }
