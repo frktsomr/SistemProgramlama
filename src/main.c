@@ -33,7 +33,6 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
    // free(p);
    // free(ptr);
   }
-
     jrb_traverse(bn, b) {
     printf("%s\t", bn->key.s);
     printf("%s\n", bn->val.s); 
