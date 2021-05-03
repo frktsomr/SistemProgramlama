@@ -1,41 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "jrb.h"
 #include "fields.h"
 
-int main(int argc, char**argv)
-{
+int main(int argc, char **argv)
+{ 
+
+  JRB b;
+  JRB bn;
   IS is;
-  int i;
-  int sayac=0;
-  //if (argc != 2) { fprintf(stderr, "printwords filename\n"); exit(1); }
- 
-  /* Open the file as an inputstruct.  Error check. */
+  char *p;
+  char *ptr;
 
-  is = new_inputstruct("dosya.txt");
-  if (is == NULL) {
-    perror("dosya hatasi ");
-    exit(1);
+if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n"); exit(1); }
+
+  is = new_inputstruct(".kilit");
+  b = make_jrb();
+
+  while (get_line(is) >= 0) 
+  { 
+
+     if(is->NF!=2)
+        
+      continue;  
+     p= strdup(is->fields[0]+1);                    
+     p[strlen(p)-2] = '\0';
+     ptr= strdup(is->fields[1]+1);                    
+     ptr[strlen(ptr)-2] = '\0';
+  	// printf("%s\n",p);
+    (void) jrb_insert_str(b, p, new_jval_s(ptr));
+   // free(p);
+   // free(ptr);
   }
 
-  /* Read each line with get_line().  Print out each word. */
-
-    while(get_line(is) >= 0 && sayac!=5) {  
-    for (i = 0; i < is->NF; i++) {
-      printf("%d: %s\n", is->line, is->fields[i]);
-      sayac++;
-      
-    }
-    
+    jrb_traverse(bn, b) {
+    printf("%s\t", bn->key.s);
+    printf("%s\n", bn->val.s); 
   }
-printf("kelime sayisi: %d\n",sayac);
- 
-    
-  /* Free up the memory allocated with new_inputstruct, and
-     close the open file.  This is not necessary in this program, 
-     since we are exiting anyway, but I just want to show how you free it up. */
-
-  jettison_inputstruct(is);
+  // EN SON AĞACI SİLMEYİ UNUTMA
   return 0;
-
 }
