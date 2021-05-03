@@ -6,12 +6,12 @@
 
 int main(int argc, char **argv)
 { 
-
   JRB b;
   JRB bn;
   IS is;
   char *p;
   char *ptr;
+  int counter=0;
 
 if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n"); exit(1); }
 
@@ -39,6 +39,6 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
     printf("%s\n", bn->val.s); 
   }
   // EN SON AĞACI SİLMEYİ UNUTMA.
-  
+
   return 0;
 }
