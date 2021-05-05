@@ -3,7 +3,7 @@
 #include <string.h>
 #include "jrb.h"
 #include "fields.h"
-
+#include "errno.h"
 int main(int argc, char **argv)
 { 
 
@@ -16,6 +16,10 @@ int main(int argc, char **argv)
 if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n"); exit(1); }
 
   is = new_inputstruct(".kilit");
+  if(is==NULL)
+  {
+      perror("Kilit dosyası bulunamadı");
+  }
   b = make_jrb();
 
   while (get_line(is) >= 0) 
@@ -24,12 +28,13 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
      if(is->NF!=2)
         
       continue;  
+
      p= strdup(is->fields[0]);  
      ptr= strdup(is->fields[1]);      
      char control=p[0];
      char control2=ptr[0];
 
-    
+   /*
      if(strcmp(&control,"\""))           
      {
        
@@ -44,35 +49,49 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
        printf( "HATALİ KULLANİM\n");
        exit(1);
      }
+     */
       
-      /* else if(strcmp(&control2,"\""))
+   /*   else if(strcmp(&control2,"\""))
      {
        
       printf( "HATALİ KULLANİM\n");
        exit(1);
 
-     }*/
-     /*else if(strcmp(&ptr[strlen(ptr)-2],"\","))
+     }
+     else if(strcmp(&ptr[strlen(ptr)-2],"\","))
      {
        
       printf( "HATALİ KULLANİM\n");
-       exit(1);
-
-     }*/
-
-    else
+      exit(1);  
+     
+     }
+   */
+   
+  //  else
     {
        p++;
+      char ch2=p[0];
+      if(strcmp(&ch2,"\\")==0)
+      {
+            p++;
+
+      }
+       //char ch3=p[strlen(p)-2];
+       if(strcmp(&p[strlen(p)-2],"\\\"")==0)
+       {
+         p[strlen(p)-2] = '\0';
+         p=p+'\"';
+        // p[strlen(p)-2]='"';
+         
+       }
+
        p[strlen(p)-2] = '\0';
        ptr++;                 
        ptr[strlen(ptr)-2] = '\0';
     }
-     
-     
-  	// printf("%s\n",p);
-    
 
-    printf("kelime değeri : %s  kelime : %s  değer: %s\n",&control2,p,ptr);
+    printf("kelime : %s  değer: %s\n",p,ptr);
+
 
    // (void) jrb_insert_str(b, p, new_jval_s(ptr));
     //free(p);
