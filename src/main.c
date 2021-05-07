@@ -24,75 +24,68 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
 
   while (get_line(is) >= 0) 
   { 
-
+    
      if(is->NF!=2)
         
       continue;  
-
+     
      p= strdup(is->fields[0]);  
-     ptr= strdup(is->fields[1]);      
+     ptr= strdup(is->fields[1]);
+     char control2=ptr[0];      
      char control=p[0];
-     char control2=ptr[0];
 
-   /*
-     if(strcmp(&control,"\""))           
-     {
-       
-      printf( "HATALİ KULLANİM\n");
-       exit(1);
+      char ch='"';
+      char ch1='\\';
+      char *value;
+      char *value1;
+      char *value2;
+      char *value3;
+      value=strchr(p,ch);
 
-     }
+   if(value!=p)
+   {
+      printf( " 1.kullanım HATALİ KULLANİM\n");
+      exit(1);
+   }
+     
 
      else if(strcmp(&p[strlen(p)-2],"\":"))
      {
 
-       printf( "HATALİ KULLANİM\n");
+       printf( "2. kullanımHATALİ KULLANİM\n");
        exit(1);
      }
-     */
+     
       
-   /*   else if(strcmp(&control2,"\""))
+      if(strcmp(&control2,"\""))
      {
        
-      printf( "HATALİ KULLANİM\n");
+      printf( "3.kullanım HATALİ KULLANİM\n");
        exit(1);
 
      }
      else if(strcmp(&ptr[strlen(ptr)-2],"\","))
      {
        
-      printf( "HATALİ KULLANİM\n");
+      printf( "4.kullanım HATALİ KULLANİM\n");
       exit(1);  
      
      }
-   */
-   
-  //  else
+    
+    p++;
+    p[strlen(p)-2] = '\0';
+
+    ptr++;
+    ptr[strlen(ptr)-2] = '\0';
+    
+    value1=strchr(p,ch1);
+
+    if(value1==p)
     {
-       p++;
-      char ch2=p[0];
-      if(strcmp(&ch2,"\\")==0)
-      {
-            p++;
-
-      }
-       //char ch3=p[strlen(p)-2];
-       if(strcmp(&p[strlen(p)-2],"\\\"")==0)
-       {
-         p[strlen(p)-2] = '\0';
-         p=p+'\"';
-        // p[strlen(p)-2]='"';
-         
-       }
-
-       p[strlen(p)-2] = '\0';
-       ptr++;                 
-       ptr[strlen(ptr)-2] = '\0';
+      p++;
     }
-
-    printf("kelime : %s  değer: %s\n",p,ptr);
-
-
+   printf("kelime : %s  değer: %s\n",p,ptr);
+    
    // (void) jrb_insert_str(b, p, new_jval_s(ptr));
     //free(p);
     //free(ptr);
