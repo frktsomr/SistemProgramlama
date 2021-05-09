@@ -36,6 +36,7 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
 
       char ch='"';
       char ch1='\\';
+      char *ch2="\\\"";
       char *value;
       char *value1;
       char *value2;
@@ -84,7 +85,27 @@ if (argc != 2) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n
     {
       p++;
     }
-   printf("kelime : %s  değer: %s\n",p,ptr);
+
+   value3=strrchr(p,ch1);
+
+   if(value3!=NULL)
+   {
+     if(strlen(value3)==2)
+     {
+       p[strlen(p)-2]='\"'; 
+       p[strlen(p)-1]= '\0';
+     }
+     else if(strlen(value3)>2)
+     {
+       char *temp=&p[strlen(p)-strlen(value3)+1];
+       for(int i=0;i<=strlen(value3);i++)
+       {
+         p[strlen(p)-strlen(value3)+i]=temp[i];
+       }
+     }
+   }
+
+   //printf("kelime : %s  değer: %s\n",p,ptr);
     
    // (void) jrb_insert_str(b, p, new_jval_s(ptr));
     //free(p);
