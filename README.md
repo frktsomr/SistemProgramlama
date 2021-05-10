@@ -1,2 +1,0 @@
-# SistemProgramlama
-#SistemProgramlamaÖdev
