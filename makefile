@@ -1,8 +1,5 @@
 CFLAGS = -O3 -Iinclude
-INCLUDE = -Iinclude
 LIBS = lib/libfdr.a
-CC = gcc
-EX  =  bin/main
 
 all: lib/libfdr.a \
 	 yap
@@ -13,10 +10,11 @@ lib/libfdr.a: $(OBJS)
 	ar ru lib/libfdr.a $(OBJS)
 	ranlib lib/libfdr.a
 
-yap: bin/main
+yap: main
 	 
 
 clean:
+	find . -maxdepth 1 ! -name "makefile" ! -name ".kilit" ! -name "giris_metin" ! -name "Readme"  ! -name "main.c" -type f -exec rm -f {} \; 
 	rm -f obj/* lib/* bin/*
 
 obj/fields.o: src/fields.c include/fields.h
@@ -31,5 +29,6 @@ obj/dllist.o: src/dllist.c include/dllist.h include/jval.h
 obj/jrb.o: src/jrb.c include/jrb.h include/jval.h
 	gcc $(CFLAGS) -c -o obj/jrb.o src/jrb.c
 
-bin/main: src/main.c $(LIBS)
-	$(CC) $(CFLAGS) -g -o main src/main.c lib/libfdr.a
+main: main.c $(LIBS)
+	gcc $(CFLAGS) -g  -Wall -o main main.c lib/libfdr.a
+
