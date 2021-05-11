@@ -43,11 +43,34 @@ is = new_inputstruct(".kilit");
   while (get_line(is) >= 0) 
   { 
     sayac1++;
+    p= strdup(is->fields[0]);  
+    if(sayac1==1)
+    {
+      if(strcmp(p,"{"))
+      {
+       printf( " 0.kullanım HATALİ KULLANİM\n");
+      exit(1);
+
+      }
+    }
+
+      if(sayac1==sayac)
+      {
+        if(strcmp(p,"}"))
+      {
+       printf( " 01.kullanım HATALİ KULLANİM\n");
+      exit(1);
+
+      }
+
+      }
+
+
      if(is->NF!=2)
         
       continue;  
      
-     p= strdup(is->fields[0]);  
+     
      ptr= strdup(is->fields[1]);
      char control2=ptr[0]; 
 
