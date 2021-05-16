@@ -82,21 +82,21 @@ is = new_inputstruct(".kilit");
 
    if(value!=p)
    {
-      printf( "Json Format Hatası1\n");
+      printf( "Json Format Hatası\n");
       exit(1);
    }
      
      else if(strcmp(&p[strlen(p)-2],"\":"))
      {
 
-       printf( "Json Format Hatası2\n");
+       printf( "Json Format Hatası\n");
        exit(1);
      }
           
       if(control2!='\"')
      {
        
-      printf("Json Format Hatası3\n");
+      printf("Json Format Hatası\n");
        exit(1);
 
      }
@@ -108,7 +108,7 @@ is = new_inputstruct(".kilit");
     {
       if(strcmp(&ptr[strlen(ptr)-1],"\""))
       {
-        printf("Json Format Hatası4\n");
+        printf("Json Format Hatası\n");
         exit(1); 
       }
       ptr++;
@@ -119,7 +119,7 @@ is = new_inputstruct(".kilit");
       if(strcmp(&ptr[strlen(ptr)-2],"\","))
      {
        
-      printf("Json Format Hatası5\n");
+      printf("Json Format Hatası\n");
       exit(1);  
      
      }
