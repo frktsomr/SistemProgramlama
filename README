@@ -1,0 +1,18 @@
+YAREN SARAÇ G181210052 2B
+ÖMER FARUK TAŞ G171210022 2C
+
+
+Makefile çalıştırıldığında, static library (libfdr.a) dosyasını kullanarak asıl programımızın 
+kaynak kodu olan main.c dosyasını derliyoruz ve kripto adlı çalıştırılabilir dosyayı elde ediyoruz.
+
+gcc komutunu kullanırken yanına -g ekleyerek debug özelliğini aktif ediyoruz ve -Wall ekleyerek program uyarı verecek
+olursa tüm uyarıları görmeyi amaçlıyoruz.
+
+Clean komutu ile derleme sırasında oluşan dosyaları ve cleanall komutu ile 
+hem derleme sırasında oluşan hem de .kilit, giris_metin, encrypted, decrypted vb. dosyaları silebiliyoruz.
+
+Run komutu ile sırasıyla clean,make ve execute işlemlerini gerçekleştirebiliyoruz.
+
+Yaptığım testler sonucu gördüğüm kadarı ile programın çalışmayan bir kısmı bulunmamaktadır.
+
+Program Libfdr/include içerisinde .h ve Libfdr/lib içerisinde libfdr.a dosyalarına ihtiyaç duymaktadır.

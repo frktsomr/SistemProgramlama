@@ -4,6 +4,8 @@
 #include "jrb.h"
 #include "fields.h"
 #include "errno.h"
+#define ENOENT 2
+
 int main(int argc, char **argv)
 { 
 
@@ -16,7 +18,7 @@ int main(int argc, char **argv)
   int sayac=0;
   int sayac1=0;
 
-if (argc != 4) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\n"); exit(1); }
+if (argc != 4) { fprintf(stderr, "usage: $> kripto -d giriş_metin cikis_metin\nkripto -e giriş_metin cikis_metin\n"); exit(1); }
 
   is = new_inputstruct(".kilit");//ilk while kaç adet satır var onu aldık
   if(is==NULL)
@@ -42,15 +44,15 @@ is = new_inputstruct(".kilit");
 
   while (get_line(is) >= 0) 
   { 
+    //printf("%d\n",is->line);
     sayac1++;
     p= strdup(is->fields[0]);  
     if(sayac1==1)
     {
       if(strcmp(p,"{"))
       {
-       printf( " 0.kullanım HATALİ KULLANİM\n");
+      printf("Parantez Hatası\n");
       exit(1);
-
       }
     }
 
@@ -58,13 +60,10 @@ is = new_inputstruct(".kilit");
       {
         if(strcmp(p,"}"))
       {
-       printf( " 01.kullanım HATALİ KULLANİM\n");
-      exit(1);
-
+       printf("Parantez Hatası\n");
+       exit(1);
       }
-
       }
-
 
      if(is->NF!=2)
         
@@ -83,21 +82,21 @@ is = new_inputstruct(".kilit");
 
    if(value!=p)
    {
-      printf( " 1.kullanım HATALİ KULLANİM\n");
+      printf( "Json Format Hatası1\n");
       exit(1);
    }
      
      else if(strcmp(&p[strlen(p)-2],"\":"))
      {
 
-       printf( "2. kullanımHATALİ KULLANİM\n");
+       printf( "Json Format Hatası2\n");
        exit(1);
      }
           
-      if(strcmp(&control2,"\""))
+      if(control2!='\"')
      {
        
-      printf( "3.kullanım HATALİ KULLANİM\n");
+      printf("Json Format Hatası3\n");
        exit(1);
 
      }
@@ -109,8 +108,8 @@ is = new_inputstruct(".kilit");
     {
       if(strcmp(&ptr[strlen(ptr)-1],"\""))
       {
-        printf( "4.kullanım HATALİ KULLANİM\n");
-      exit(1); 
+        printf("Json Format Hatası4\n");
+        exit(1); 
       }
       ptr++;
     ptr[strlen(ptr)-1] = '\0';
@@ -120,7 +119,7 @@ is = new_inputstruct(".kilit");
       if(strcmp(&ptr[strlen(ptr)-2],"\","))
      {
        
-      printf( "5.kullanım HATALİ KULLANİM\n");
+      printf("Json Format Hatası5\n");
       exit(1);  
      
      }
@@ -135,7 +134,6 @@ is = new_inputstruct(".kilit");
     }
 
    value3=strrchr(p,ch1);
-
    if(value3!=NULL)
    {
      if(strlen(value3)==2)
@@ -160,8 +158,6 @@ is = new_inputstruct(".kilit");
     {
       (void) jrb_insert_str(b, ptr, new_jval_s(p));
     }  
-    // free(p);
-    //free(ptr);
   }
 
 is1 = new_inputstruct(argv[2]);
