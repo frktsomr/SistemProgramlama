@@ -13,6 +13,6 @@ hem derleme sırasında oluşan hem de .kilit, giris_metin, encrypted, decrypted
 
 Run komutu ile sırasıyla clean,make ve execute işlemlerini gerçekleştirebiliyoruz.
 
-Yaptığım testler sonucu gördüğüm kadarı ile programın çalışmayan bir kısmı bulunmamaktadır.
+Bütün örneklerin denemesini gerçekleştirdik ve programın her türlü örneğe uygun şekilde çalıştırılabilir olduğunu gördük.
 
 Program Libfdr/include içerisinde .h ve Libfdr/lib içerisinde libfdr.a dosyalarına ihtiyaç duymaktadır.
